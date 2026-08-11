@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "docker compose up --build",
     "seed": "docker compose exec rag-service python -m app.seed",
-    "test": "npm --workspace apps/api run test && npm --workspace apps/frontend run test",
-    "build": "npm --workspace apps/api run build && npm --workspace apps/frontend run build"
+    "test": "npm --workspace apps/api run test && npm --workspace apps/frontend run test && PYTHONPATH=services/data-fetcher python3 -m unittest discover -s services/data-fetcher/tests",
+    "build": "npm --workspace apps/api run build && npm --workspace apps/frontend run build && python3 -m compileall -q services/data-fetcher/data_fetcher",
+    "fetch:data": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli",
+    "fetch:data:live": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --limit 20 --include-web-evidence --delay-ms 3000 --radius-meters 1500"
   }
 }

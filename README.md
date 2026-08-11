@@ -2,7 +2,7 @@
 
 SesameKiller-Compass is an airport-benefit GraphRAG platform demo: a travel-domain Q&A app with React, Express.js, Flask, MongoDB, Neo4j, LangChain-style semantic retrieval, Cypher graph retrieval, Docker, Nginx, tests, and CI.
 
-The app answers questions about 10 sample airports, their terminals, restaurants, and credit-card benefits. It is the initial demo slice of a larger airport-benefit GraphRAG platform: the next planned layer is a legal public API / crawler pipeline that exports normalized airport and benefit data for Neo4j/MongoDB import.
+The app answers questions about 10 sample airports, their terminals, restaurants, and credit-card benefits. It is the initial demo slice of a larger airport-benefit GraphRAG platform. The repo now includes the first legal public-data fetcher that exports source-backed airport, restaurant, and benefit schema files for the future Neo4j/MongoDB importer.
 
 ## Architecture
 
@@ -78,6 +78,33 @@ docker compose -f docker-compose.cloud.yml up --build
 
 Cloud database setup instructions are in [docs/cloud-databases.md](docs/cloud-databases.md).
 
+## Public Data Fetcher
+
+The fetcher uses JSON as the canonical normalized format and writes CSV beside it for Neo4j/MongoDB import and manual QA. Generated data is ignored by git; commit code, schemas, and docs, then regenerate data locally when needed.
+
+Fast airport-only smoke test:
+
+```bash
+npm run fetch:data -- --limit 20 --skip-overpass
+```
+
+Live public-data run for the first 20 target airports, with slower public-API pacing:
+
+```bash
+npm run fetch:data:live
+```
+
+What it currently fetches:
+
+```text
+OurAirports public CSV -> airport metadata and official website links
+OpenStreetMap Overpass -> restaurant-like amenities and explicit payment tags
+Official airport public pages -> robots-aware evidence snapshots only
+Visa benefits -> schema-only output until approved API or licensed source exists
+```
+
+Legal and source evidence is documented in [docs/legal-data-policy.md](docs/legal-data-policy.md). Fetcher usage details are in [docs/data-fetcher.md](docs/data-fetcher.md).
+
 ## Try These Questions
 
 ```text
@@ -99,11 +126,12 @@ What benefits does Meridian Miles Reserve have at HVA?
 - Local Neo4j seed graph with 10 sample airports, terminals, restaurants, credit cards, benefits, and `KnowledgeChunk` vector records.
 - Docker Compose stack for Neo4j, MongoDB, Flask, Express, React, and Nginx.
 - Cloud Compose stack for running the same app against MongoDB Atlas and Neo4j AuraDB.
-- GitHub Actions CI for API tests/build, frontend tests/build, and Python RAG tests.
+- Python public-data fetcher that exports canonical JSON plus CSV for 20 target airports, with OurAirports, Overpass, robots-aware official page evidence, source manifests, and legal guardrails.
+- GitHub Actions CI for API tests/build, frontend tests/build, Python data-fetcher tests/build, and Python RAG tests.
 
 ## Not Implemented Yet
 
-- Real production data ingestion. The current data is generated sample demo data in `database/seed/airports.json`.
+- Production importer from fetched JSON/CSV into Neo4j and MongoDB. The app still runs on generated sample demo data in `database/seed/airports.json` until that importer is added.
 - LLM-generated Cypher. The current implementation uses safer template-based Cypher retrieval. Adding LLM-generated Cypher would require schema prompting, validation, allowlisted clauses, query timeouts, and read-only permissions.
 - True streaming responses. The UI shows loading state, but the backend returns the answer after retrieval/generation completes.
 - Production authentication and user accounts. JWT is included only as a demo mechanism.
@@ -120,6 +148,8 @@ apps/frontend        React demo UI
 apps/api             Express API gateway, REST, GraphQL, MongoDB persistence
 services/rag-service Flask Q&A orchestration, semantic retrieval, Cypher retrieval, answer generation
 database/seed        Sample airport graph data
+services/data-fetcher Python public API/crawler pipeline with JSON and CSV exports
+data                Ignored generated raw, normalized, and manifest outputs
 database/neo4j       Neo4j schema reference
 database/mongo-init  MongoDB collection/index initialization
 nginx                Local reverse proxy
