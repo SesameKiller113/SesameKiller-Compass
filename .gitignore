@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.vite/
+*.tsbuildinfo
+apps/frontend/vite.config.d.ts
+apps/frontend/vite.config.js
+.pytest_cache/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+coverage/
+.nyc_output/
+neo4j-data/
+mongo-data/

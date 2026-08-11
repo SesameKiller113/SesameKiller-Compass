@@ -1,0 +1,303 @@
+[
+  {
+    "code": "RWI",
+    "name": "Redwood International Airport",
+    "city": "Larkspur",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "RWI-T1",
+        "name": "Fern Terminal",
+        "gateRange": "A1-A18",
+        "restaurants": [
+          {"id": "RWI-R1", "name": "Juniper Table", "cuisine": "Pacific bowls", "priceLevel": "$$", "hours": "05:00-22:00"},
+          {"id": "RWI-R2", "name": "Runway Roast", "cuisine": "Coffee and bakery", "priceLevel": "$", "hours": "04:30-21:30"}
+        ]
+      },
+      {
+        "id": "RWI-T2",
+        "name": "Canopy Terminal",
+        "gateRange": "B1-B14",
+        "restaurants": [
+          {"id": "RWI-R3", "name": "Moss & Grain", "cuisine": "Vegetarian", "priceLevel": "$$", "hours": "06:00-20:00"},
+          {"id": "RWI-R4", "name": "Cloudline Deli", "cuisine": "Sandwiches", "priceLevel": "$", "hours": "05:30-23:00"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "RWI-B1", "card": "Atlas Platinum Travel", "issuer": "Atlas Bank", "tier": "Premium", "type": "Dining credit", "description": "$18 credit at Juniper Table before 10 PM", "eligibility": "Same-day boarding pass and Atlas Platinum Travel card", "terminalIds": ["RWI-T1"], "restaurantIds": ["RWI-R1"]},
+      {"id": "RWI-B2", "card": "Nova Signature", "issuer": "Nova Credit", "tier": "Signature", "type": "Lounge pass", "description": "Two-hour Canopy Lounge access near B8", "eligibility": "International itinerary or 6 hour layover", "terminalIds": ["RWI-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "HVA",
+    "name": "Harborview Airport",
+    "city": "Port Azure",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "HVA-T1",
+        "name": "Marina Terminal",
+        "gateRange": "C1-C16",
+        "restaurants": [
+          {"id": "HVA-R1", "name": "Pier 18 Noodles", "cuisine": "Noodles", "priceLevel": "$$", "hours": "06:00-22:30"},
+          {"id": "HVA-R2", "name": "Beacon Burger", "cuisine": "Burgers", "priceLevel": "$$", "hours": "05:00-23:00"}
+        ]
+      },
+      {
+        "id": "HVA-T2",
+        "name": "Tide Terminal",
+        "gateRange": "D1-D12",
+        "restaurants": [
+          {"id": "HVA-R3", "name": "Salt & Spoon", "cuisine": "Seafood", "priceLevel": "$$$", "hours": "10:00-21:00"},
+          {"id": "HVA-R4", "name": "Dockside Espresso", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:30-20:00"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "HVA-B1", "card": "Meridian Miles Reserve", "issuer": "Meridian", "tier": "Reserve", "type": "Dining credit", "description": "$22 seafood credit at Salt & Spoon", "eligibility": "Cardholder plus one guest", "terminalIds": ["HVA-T2"], "restaurantIds": ["HVA-R3"]},
+      {"id": "HVA-B2", "card": "Orbit Preferred", "issuer": "Orbit Finance", "tier": "Preferred", "type": "Rail transfer", "description": "Free harbor rail transfer from Marina Terminal", "eligibility": "Use Orbit Preferred to book the arriving flight", "terminalIds": ["HVA-T1"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "SRA",
+    "name": "Summit Ridge Airport",
+    "city": "Alpine Falls",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "SRA-T1",
+        "name": "Pine Terminal",
+        "gateRange": "E1-E20",
+        "restaurants": [
+          {"id": "SRA-R1", "name": "Switchback Grill", "cuisine": "Grill", "priceLevel": "$$", "hours": "05:30-22:00"},
+          {"id": "SRA-R2", "name": "Peak Tea House", "cuisine": "Tea and snacks", "priceLevel": "$", "hours": "06:00-19:00"}
+        ]
+      },
+      {
+        "id": "SRA-T2",
+        "name": "Glacier Terminal",
+        "gateRange": "F1-F10",
+        "restaurants": [
+          {"id": "SRA-R3", "name": "Trailhead Tacos", "cuisine": "Tacos", "priceLevel": "$", "hours": "07:00-21:30"},
+          {"id": "SRA-R4", "name": "Ridge Market", "cuisine": "Grab-and-go", "priceLevel": "$", "hours": "04:00-23:30"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "SRA-B1", "card": "Atlas Platinum Travel", "issuer": "Atlas Bank", "tier": "Premium", "type": "Fast track", "description": "Priority security lane at Pine Terminal", "eligibility": "Morning departures before 11 AM", "terminalIds": ["SRA-T1"], "restaurantIds": []},
+      {"id": "SRA-B2", "card": "Summit Club Card", "issuer": "Summit Federal", "tier": "Club", "type": "Dining credit", "description": "$12 taco credit at Trailhead Tacos", "eligibility": "Domestic itinerary and Summit Club Card", "terminalIds": ["SRA-T2"], "restaurantIds": ["SRA-R3"]}
+    ]
+  },
+  {
+    "code": "LMA",
+    "name": "Lakeside Metro Airport",
+    "city": "Clearwater Bend",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "LMA-T1",
+        "name": "Willow Terminal",
+        "gateRange": "G1-G17",
+        "restaurants": [
+          {"id": "LMA-R1", "name": "Blue Current Cafe", "cuisine": "Cafe", "priceLevel": "$", "hours": "05:00-20:00"},
+          {"id": "LMA-R2", "name": "Lakehouse Ramen", "cuisine": "Ramen", "priceLevel": "$$", "hours": "09:00-22:00"}
+        ]
+      },
+      {
+        "id": "LMA-T2",
+        "name": "Reed Terminal",
+        "gateRange": "H1-H11",
+        "restaurants": [
+          {"id": "LMA-R3", "name": "Harbor Greens", "cuisine": "Salads", "priceLevel": "$$", "hours": "06:00-21:00"},
+          {"id": "LMA-R4", "name": "Boardwalk Slice", "cuisine": "Pizza", "priceLevel": "$", "hours": "07:00-23:00"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "LMA-B1", "card": "Nova Signature", "issuer": "Nova Credit", "tier": "Signature", "type": "Dining credit", "description": "$15 ramen credit at Lakehouse Ramen", "eligibility": "One redemption per travel day", "terminalIds": ["LMA-T1"], "restaurantIds": ["LMA-R2"]},
+      {"id": "LMA-B2", "card": "Meridian Miles Reserve", "issuer": "Meridian", "tier": "Reserve", "type": "Lounge pass", "description": "Reed Quiet Room access near H6", "eligibility": "Reserve card and same-day boarding pass", "terminalIds": ["LMA-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "DBA",
+    "name": "Desert Bloom Airport",
+    "city": "Mesa Verde",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "DBA-T1",
+        "name": "Cactus Terminal",
+        "gateRange": "J1-J15",
+        "restaurants": [
+          {"id": "DBA-R1", "name": "Agave Kitchen", "cuisine": "Southwestern", "priceLevel": "$$", "hours": "05:30-22:00"},
+          {"id": "DBA-R2", "name": "Dune Coffee", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:30-20:30"}
+        ]
+      },
+      {
+        "id": "DBA-T2",
+        "name": "Oasis Terminal",
+        "gateRange": "K1-K13",
+        "restaurants": [
+          {"id": "DBA-R3", "name": "Mirage Mezze", "cuisine": "Mediterranean", "priceLevel": "$$", "hours": "08:00-22:30"},
+          {"id": "DBA-R4", "name": "Sandstone Subs", "cuisine": "Subs", "priceLevel": "$", "hours": "05:00-23:00"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "DBA-B1", "card": "Orbit Preferred", "issuer": "Orbit Finance", "tier": "Preferred", "type": "Dining credit", "description": "$16 credit at Agave Kitchen", "eligibility": "Available after 2 PM local time", "terminalIds": ["DBA-T1"], "restaurantIds": ["DBA-R1"]},
+      {"id": "DBA-B2", "card": "Atlas Platinum Travel", "issuer": "Atlas Bank", "tier": "Premium", "type": "Shower suite", "description": "Oasis refresh suite access for long layovers", "eligibility": "Layover longer than 5 hours", "terminalIds": ["DBA-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "BHI",
+    "name": "Blue Harbor International",
+    "city": "Bayhaven",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "BHI-T1",
+        "name": "Compass Terminal",
+        "gateRange": "L1-L18",
+        "restaurants": [
+          {"id": "BHI-R1", "name": "Compass Curry", "cuisine": "Indian", "priceLevel": "$$", "hours": "09:00-22:00"},
+          {"id": "BHI-R2", "name": "Bluebird Bakery", "cuisine": "Bakery", "priceLevel": "$", "hours": "05:00-19:00"}
+        ]
+      },
+      {
+        "id": "BHI-T2",
+        "name": "Harbor Terminal",
+        "gateRange": "M1-M16",
+        "restaurants": [
+          {"id": "BHI-R3", "name": "Wavefront Sushi", "cuisine": "Sushi", "priceLevel": "$$$", "hours": "10:30-21:30"},
+          {"id": "BHI-R4", "name": "Lantern Soup Bar", "cuisine": "Soups", "priceLevel": "$", "hours": "06:00-20:30"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "BHI-B1", "card": "Meridian Miles Reserve", "issuer": "Meridian", "tier": "Reserve", "type": "Dining credit", "description": "$20 sushi credit at Wavefront Sushi", "eligibility": "Reserve cardholders on international flights", "terminalIds": ["BHI-T2"], "restaurantIds": ["BHI-R3"]},
+      {"id": "BHI-B2", "card": "Nova Signature", "issuer": "Nova Credit", "tier": "Signature", "type": "Lounge pass", "description": "Compass Lounge day pass", "eligibility": "One pass per month", "terminalIds": ["BHI-T1"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "NSG",
+    "name": "Northstar Gateway",
+    "city": "Frostfield",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "NSG-T1",
+        "name": "Aurora Terminal",
+        "gateRange": "N1-N12",
+        "restaurants": [
+          {"id": "NSG-R1", "name": "Aurora Dumpling", "cuisine": "Dumplings", "priceLevel": "$$", "hours": "07:00-22:00"},
+          {"id": "NSG-R2", "name": "Polar Press", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:00-21:00"}
+        ]
+      },
+      {
+        "id": "NSG-T2",
+        "name": "Voyager Terminal",
+        "gateRange": "P1-P14",
+        "restaurants": [
+          {"id": "NSG-R3", "name": "Voyager BBQ", "cuisine": "Barbecue", "priceLevel": "$$", "hours": "10:00-23:00"},
+          {"id": "NSG-R4", "name": "Frostline Market", "cuisine": "Grab-and-go", "priceLevel": "$", "hours": "04:30-23:30"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "NSG-B1", "card": "Summit Club Card", "issuer": "Summit Federal", "tier": "Club", "type": "Dining credit", "description": "$14 dumpling credit at Aurora Dumpling", "eligibility": "Club card and domestic boarding pass", "terminalIds": ["NSG-T1"], "restaurantIds": ["NSG-R1"]},
+      {"id": "NSG-B2", "card": "Orbit Preferred", "issuer": "Orbit Finance", "tier": "Preferred", "type": "Priority boarding", "description": "Priority boarding lane at Voyager Terminal", "eligibility": "Flight booked through Orbit Travel", "terminalIds": ["NSG-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "GPA",
+    "name": "Golden Plains Airport",
+    "city": "West Prairie",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "GPA-T1",
+        "name": "Prairie Terminal",
+        "gateRange": "Q1-Q19",
+        "restaurants": [
+          {"id": "GPA-R1", "name": "Harvest Hall", "cuisine": "American", "priceLevel": "$$", "hours": "06:00-22:00"},
+          {"id": "GPA-R2", "name": "Fieldstone Coffee", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:30-20:00"}
+        ]
+      },
+      {
+        "id": "GPA-T2",
+        "name": "Sunset Terminal",
+        "gateRange": "R1-R13",
+        "restaurants": [
+          {"id": "GPA-R3", "name": "Sunset Pho", "cuisine": "Pho", "priceLevel": "$$", "hours": "09:00-21:00"},
+          {"id": "GPA-R4", "name": "Golden Slice", "cuisine": "Pizza", "priceLevel": "$", "hours": "08:00-23:00"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "GPA-B1", "card": "Atlas Platinum Travel", "issuer": "Atlas Bank", "tier": "Premium", "type": "Dining credit", "description": "$17 credit at Harvest Hall", "eligibility": "Available once per cardholder per day", "terminalIds": ["GPA-T1"], "restaurantIds": ["GPA-R1"]},
+      {"id": "GPA-B2", "card": "Meridian Miles Reserve", "issuer": "Meridian", "tier": "Reserve", "type": "Rail transfer", "description": "Free prairie rail connector from Sunset Terminal", "eligibility": "Reserve card linked to itinerary", "terminalIds": ["GPA-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "CCI",
+    "name": "Cedar Coast International",
+    "city": "Cedarport",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "CCI-T1",
+        "name": "Driftwood Terminal",
+        "gateRange": "S1-S15",
+        "restaurants": [
+          {"id": "CCI-R1", "name": "Driftwood Pho", "cuisine": "Pho", "priceLevel": "$$", "hours": "08:00-21:30"},
+          {"id": "CCI-R2", "name": "Coastline Coffee", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:30-20:00"}
+        ]
+      },
+      {
+        "id": "CCI-T2",
+        "name": "Cedar Terminal",
+        "gateRange": "T1-T17",
+        "restaurants": [
+          {"id": "CCI-R3", "name": "Cedar Bento", "cuisine": "Japanese", "priceLevel": "$$", "hours": "10:00-22:00"},
+          {"id": "CCI-R4", "name": "Gatehouse Greens", "cuisine": "Salads", "priceLevel": "$", "hours": "06:00-20:30"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "CCI-B1", "card": "Nova Signature", "issuer": "Nova Credit", "tier": "Signature", "type": "Dining credit", "description": "$13 pho credit at Driftwood Pho", "eligibility": "Valid on departures after 8 AM", "terminalIds": ["CCI-T1"], "restaurantIds": ["CCI-R1"]},
+      {"id": "CCI-B2", "card": "Orbit Preferred", "issuer": "Orbit Finance", "tier": "Preferred", "type": "Lounge pass", "description": "Cedar Lounge access near T9", "eligibility": "One guest allowed on weekends", "terminalIds": ["CCI-T2"], "restaurantIds": []}
+    ]
+  },
+  {
+    "code": "SLA",
+    "name": "Silverline Airfield",
+    "city": "Metrovale",
+    "country": "USA",
+    "terminals": [
+      {
+        "id": "SLA-T1",
+        "name": "Metro Terminal",
+        "gateRange": "U1-U22",
+        "restaurants": [
+          {"id": "SLA-R1", "name": "Metro Bao", "cuisine": "Bao", "priceLevel": "$$", "hours": "07:00-22:00"},
+          {"id": "SLA-R2", "name": "Signal Coffee", "cuisine": "Coffee", "priceLevel": "$", "hours": "04:00-21:30"}
+        ]
+      },
+      {
+        "id": "SLA-T2",
+        "name": "Silver Terminal",
+        "gateRange": "V1-V16",
+        "restaurants": [
+          {"id": "SLA-R3", "name": "Silverline Pasta", "cuisine": "Italian", "priceLevel": "$$", "hours": "10:30-22:00"},
+          {"id": "SLA-R4", "name": "Late Gate Market", "cuisine": "Grab-and-go", "priceLevel": "$", "hours": "24 hours"}
+        ]
+      }
+    ],
+    "benefits": [
+      {"id": "SLA-B1", "card": "Atlas Platinum Travel", "issuer": "Atlas Bank", "tier": "Premium", "type": "Dining credit", "description": "$19 pasta credit at Silverline Pasta", "eligibility": "Cardholder must show same-day ticket", "terminalIds": ["SLA-T2"], "restaurantIds": ["SLA-R3"]},
+      {"id": "SLA-B2", "card": "Summit Club Card", "issuer": "Summit Federal", "tier": "Club", "type": "Fast track", "description": "Metro Terminal priority security after 5 PM", "eligibility": "Evening departures only", "terminalIds": ["SLA-T1"], "restaurantIds": []}
+    ]
+  }
+]
+

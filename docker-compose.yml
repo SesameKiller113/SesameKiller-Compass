@@ -1,0 +1,101 @@
+name: sesamekiller-compass
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: sesamekiller-compass-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./database/mongo-init:/docker-entrypoint-initdb.d:ro
+
+  neo4j:
+    image: neo4j:5.24-community
+    container_name: sesamekiller-compass-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/local-password
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p local-password 'RETURN 1'"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+
+  rag-service:
+    build:
+      context: ./services/rag-service
+    container_name: sesamekiller-compass-rag-service
+    restart: unless-stopped
+    environment:
+      FLASK_ENV: development
+      PORT: 5001
+      AUTO_SEED: "true"
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-local}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: local-password
+    volumes:
+      - ./database/seed:/app/database/seed:ro
+    ports:
+      - "5001:5001"
+    depends_on:
+      neo4j:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ./apps/api
+    container_name: sesamekiller-compass-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      MONGO_URI: mongodb://mongo:27017/sesamekiller_compass
+      RAG_SERVICE_URL: http://rag-service:5001
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret}
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+      - rag-service
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    container_name: sesamekiller-compass-frontend
+    restart: unless-stopped
+    environment:
+      VITE_API_BASE_URL: /api
+      VITE_GRAPHQL_URL: /graphql
+      API_PROXY_TARGET: http://api:3001
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: sesamekiller-compass-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - api
+
+volumes:
+  mongo_data:
+  neo4j_data:
