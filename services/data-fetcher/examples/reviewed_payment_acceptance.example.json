@@ -1,0 +1,18 @@
+{
+  "reviewedAt": "2026-08-11",
+  "reviewedBy": "your-name-or-review-queue",
+  "legalBasis": "Manual review of an official merchant, airport, acquirer, or licensed-feed source that permits this project to store and display the fact.",
+  "paymentAcceptance": [
+    {
+      "restaurantId": "official:jfk:panynj:example-id-from-restaurants-json",
+      "paymentMethod": "american_express",
+      "acceptanceStatus": "accepted",
+      "sourceUrl": "https://www.example-merchant.com/payment-methods",
+      "evidenceType": "official_merchant_statement",
+      "evidenceValue": "Official merchant source states American Express is accepted at this location.",
+      "reviewedAt": "2026-08-11",
+      "reviewedBy": "your-name-or-review-queue",
+      "legalBasis": "Manual review of official merchant payment-method page."
+    }
+  ]
+}

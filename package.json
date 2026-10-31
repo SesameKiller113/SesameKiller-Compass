@@ -9,7 +9,15 @@
   "scripts": {
     "dev": "docker compose up --build",
     "seed": "docker compose exec rag-service python -m app.seed",
-    "test": "npm --workspace apps/api run test && npm --workspace apps/frontend run test",
-    "build": "npm --workspace apps/api run build && npm --workspace apps/frontend run build"
+    "test": "npm --workspace apps/api run test && npm --workspace apps/frontend run test && PYTHONPATH=services/data-fetcher python3 -m unittest discover -s services/data-fetcher/tests",
+    "build": "npm --workspace apps/api run build && npm --workspace apps/frontend run build && python3 -m compileall -q services/data-fetcher/data_fetcher",
+    "fetch:data": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli",
+    "fetch:providers": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --provider-access-report",
+    "fetch:data:live": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --limit 20 --restaurant-source official --include-web-evidence --delay-ms 3000 --radius-meters 1500",
+    "fetch:data:payment-pages": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --limit 20 --restaurant-source official --restaurant-detail-payment-pages --delay-ms 3000",
+    "fetch:data:us200": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --us-airports --limit 200 --restaurant-source none",
+    "fetch:data:us200:official": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --us-airports --limit 200 --restaurant-source official --delay-ms 3000",
+    "fetch:data:us200:osm": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --us-airports --limit 200 --restaurant-source osm --osm-association-mode area-first --delay-ms 3000",
+    "fetch:data:us2000:osm": "PYTHONPATH=services/data-fetcher python3 -m data_fetcher.cli --us-airports --include-non-scheduled-us-airports --limit 2000 --restaurant-source osm --osm-association-mode area-first --delay-ms 3000"
   }
 }
