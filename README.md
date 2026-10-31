@@ -2,7 +2,7 @@
 
 SesameKiller-Compass is an airport-benefit GraphRAG platform demo: a travel-domain Q&A app with React, Express.js, Flask, MongoDB, Neo4j, LangChain-style semantic retrieval, Cypher graph retrieval, Docker, Nginx, tests, and CI.
 
-The app answers questions about 10 sample airports, their terminals, restaurants, and credit-card benefits. It is the initial demo slice of a larger airport-benefit GraphRAG platform: the next planned layer is a legal public API / crawler pipeline that exports normalized airport and benefit data for Neo4j/MongoDB import.
+The app currently ships with 10 sample airports for the UI demo and a separate public-data fetcher for the first 20 real target airports. It is the initial demo slice of a larger airport-benefit GraphRAG platform. The repo now includes the first legal public-data fetcher that exports source-backed airport, restaurant, and benefit schema files for the future Neo4j/MongoDB importer.
 
 ## Architecture
 
@@ -78,6 +78,61 @@ docker compose -f docker-compose.cloud.yml up --build
 
 Cloud database setup instructions are in [docs/cloud-databases.md](docs/cloud-databases.md).
 
+
+## Public Data Fetcher
+
+The fetcher uses JSON as the canonical normalized format and writes CSV beside it for Neo4j/MongoDB import and manual QA. Generated data is ignored by git; commit code, schemas, and docs, then regenerate data locally when needed.
+
+Fast no-restaurant smoke test:
+
+```bash
+npm run fetch:data -- --limit 20 --restaurant-source none
+```
+
+Live public-data run for the first 20 target airports, with official restaurant sources and slower public-source pacing:
+
+```bash
+npm run fetch:data:live
+```
+
+Try a 200-airport US coverage sample:
+
+```bash
+npm run fetch:data:us200
+npm run fetch:data:us200:official
+npm run fetch:data:us200:osm
+```
+
+Try the same scalable OSM shape for 2000 airports:
+
+```bash
+npm run fetch:data:us2000:osm
+```
+
+For repeated 2000+ runs, point `OVERPASS_ENDPOINT` at your own Overpass endpoint, an OSM extract pipeline, or a commercial OSM provider instead of relying on the public endpoint.
+
+What it currently fetches:
+
+```text
+OurAirports public CSV -> airport metadata and official website links
+Official airport directories -> source-backed restaurants for JFK, LGA, EWR, SFO, SEA, PHX, CLT, IAH, DTW, LAX, DEN, LAS, ORD, DFW, MSP, and PHL in the latest live validation; ATL is configured but currently access-challenge blocked
+Payment acceptance fact table -> accepted only from explicit source evidence; otherwise unknown
+Official restaurant detail pages -> optional explicit payment-text scan, never inference from silence
+Google Places API -> optional generic paymentOptions enrichment with a local key, never card-network inference
+OpenStreetMap Overpass -> scalable area-first restaurant discovery/payment tags, never official terminal proof
+Reviewed card-benefit JSON -> card products/benefits only when you provide reviewed official-source input
+```
+
+Start a local card-benefit input file from the template:
+
+```bash
+cp services/data-fetcher/examples/reviewed_card_benefits.example.json data/manual/card_benefits.local.json
+npm run fetch:data -- --airports JFK,SFO --card-benefits-file data/manual/card_benefits.local.json
+npm run fetch:data -- --airports SFO,PHL,MSP --restaurant-detail-payment-pages --restaurant-detail-limit 50 --delay-ms 3000
+```
+
+Legal and source evidence is documented in [docs/legal-data-policy.md](docs/legal-data-policy.md). Fetcher usage details are in [docs/data-fetcher.md](docs/data-fetcher.md). Card/API strategy is in [docs/card-api-strategy.md](docs/card-api-strategy.md). Payment provider onboarding is in [docs/payment-provider-onboarding.md](docs/payment-provider-onboarding.md).
+
 ## Try These Questions
 
 ```text
@@ -99,11 +154,12 @@ What benefits does Meridian Miles Reserve have at HVA?
 - Local Neo4j seed graph with 10 sample airports, terminals, restaurants, credit cards, benefits, and `KnowledgeChunk` vector records.
 - Docker Compose stack for Neo4j, MongoDB, Flask, Express, React, and Nginx.
 - Cloud Compose stack for running the same app against MongoDB Atlas and Neo4j AuraDB.
-- GitHub Actions CI for API tests/build, frontend tests/build, and Python RAG tests.
+- Python public-data fetcher that exports canonical JSON plus CSV, with OurAirports US-airport selection, official restaurant adapters, scalable OSM area-first restaurant discovery, optional official restaurant detail-page payment scans, optional Google Places generic payment enrichment, reviewed/licensed payment acceptance imports, a separate payment acceptance fact table, product-readiness coverage gates, source manifests, and legal guardrails.
+- GitHub Actions CI for API tests/build, frontend tests/build, Python data-fetcher tests/build, and Python RAG tests.
 
 ## Not Implemented Yet
 
-- Real production data ingestion. The current data is generated sample demo data in `database/seed/airports.json`.
+- Production importer from fetched JSON/CSV into Neo4j and MongoDB. The app still runs on generated sample demo data in `database/seed/airports.json` until that importer is added.
 - LLM-generated Cypher. The current implementation uses safer template-based Cypher retrieval. Adding LLM-generated Cypher would require schema prompting, validation, allowlisted clauses, query timeouts, and read-only permissions.
 - True streaming responses. The UI shows loading state, but the backend returns the answer after retrieval/generation completes.
 - Production authentication and user accounts. JWT is included only as a demo mechanism.
@@ -120,6 +176,8 @@ apps/frontend        React demo UI
 apps/api             Express API gateway, REST, GraphQL, MongoDB persistence
 services/rag-service Flask Q&A orchestration, semantic retrieval, Cypher retrieval, answer generation
 database/seed        Sample airport graph data
+services/data-fetcher Python public API/crawler pipeline with JSON and CSV exports
+data                Ignored generated raw, normalized, and manifest outputs
 database/neo4j       Neo4j schema reference
 database/mongo-init  MongoDB collection/index initialization
 nginx                Local reverse proxy

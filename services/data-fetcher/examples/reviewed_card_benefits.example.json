@@ -1,0 +1,31 @@
+{
+  "reviewedAt": "2026-08-11",
+  "reviewedBy": "SesameKiller Reviewer",
+  "legalBasis": "Manual review of official issuer/card-network public terms; no automated scraping.",
+  "cardProducts": [
+    {
+      "id": "card:issuer:product-example",
+      "network": "visa",
+      "issuer": "Issuer Name",
+      "productName": "Product Name",
+      "sourceUrl": "https://www.issuer.example/cards/product",
+      "termsUrl": "https://www.issuer.example/cards/product/terms",
+      "benefits": [
+        {
+          "id": "benefit:issuer:product-example:dining-credit",
+          "benefitType": "dining_credit",
+          "description": "Short reviewed benefit description from official terms.",
+          "airportIata": "JFK",
+          "restaurantId": "official:jfk:panynj:example-poi-id",
+          "restaurantName": "Official Restaurant Name",
+          "paymentNetwork": "visa",
+          "termsUrl": "https://www.issuer.example/cards/product/terms",
+          "sourceUrl": "https://www.issuer.example/cards/product/terms",
+          "validFrom": "2026-01-01",
+          "validTo": null,
+          "requiresEnrollment": false
+        }
+      ]
+    }
+  ]
+}
